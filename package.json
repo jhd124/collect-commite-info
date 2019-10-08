@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15"
+  },
+  "name": "collect-commit-info",
+  "version": "0.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "bin": {
+    "commits": "bin/commits.js"
+  }
+}
