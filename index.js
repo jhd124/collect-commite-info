@@ -110,10 +110,20 @@ function getCommitInfoBetweenTwoCommits(commitHashes) {
 
     const [hash1, hash2] = commitHashes;
 
-    const _topHash = (
-        optionReg.fromCurrentStage.test(option) ||
-        optionReg.betweenTwo.test(option)
-    ) ? arg1 : hash1;
+    const isBetween = optionReg.betweenTwo.test(option);
+    const isFromCurrentStage = optionReg.fromCurrentStage.test(option);
+
+    let _baseHash = hash2;
+    let _topHash = hash1;
+
+    if (optionReg.betweenTwo.test(option)) {
+        _topHash = arg1;
+        _baseHash = arg2;
+    }
+    if (optionReg.fromCurrentStage.test(option)) {
+        _topHash = arg1;
+        _baseHash = hash1;
+    }
 
     const _baseHash = optionReg.betweenTwo.test(option) ? arg2 : hash2;
     return exec(`git log ${_baseHash}..${_topHash} --pretty=format:${commitFormatString}`)
