@@ -120,10 +120,10 @@ function insertCommitInfo(commits) {
     if (fs.existsSync(commitLogFilePath)) {
         const commitLog = fs.readJSONSync(commitLogFilePath);
         const nextLog = _.uniqBy([...commits, ...commitLog], "hash");
-        fs.writeJSON(commitLogFilePath, nextLog, writeOptions);
+        fs.writeJSONSync(commitLogFilePath, nextLog, writeOptions);
     } else {
         fs.ensureFileSync(commitLogFilePath);
-        fs.writeJSON(commitLogFilePath, commits, writeOptions);
+        fs.writeJSONSync(commitLogFilePath, commits, writeOptions);
     }
 }
 
