@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "meow": "^5.0.0"
   },
   "name": "collect-commit-info",
   "version": "0.0.4",

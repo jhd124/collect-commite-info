@@ -13,22 +13,49 @@ const _ = require("lodash");
 const path = require("path");
 const version = require(path.resolve(process.cwd(), "./package.json")).version;
 const fs = require("fs-extra");
+const meow = require("meow");
 
 const config = {
-    diffIgnore: ["*.svg", "*.lock", "*/lib/*"],
+    diffIgnore: ["*.svg", "*.lock", "*/lib/*", "commitLog.json"],
     messageFilter: null,
 };
 
-const option = process.argv[2];
-const arg1 = process.argv[3];
-const arg2 = process.argv[4];
+const cli = meow(`
+    Usage
+        commits
+    Options
+        --list, -l:                  show a list of commits, instead of write commits information
+        --current-commit, -c sha1:   generate commits between sha1 and latest version
+        --between-two, -b sha1 sha2: generate commits between sha1 and sha2
+        --filter -f regexp:          filter commits according to commit message with the regular expression
+`, {
+    booleanDefault: undefined,
+    flags: {
+        list: {
+            type: "boolean",
+            default: false,
+            alias: "l",
+        },
+        "current-commit": {
+            type: "boolean",
+            default: false,
+            alias: "c",
+        },
+        "between-two": {
+            type: "boolean",
+            default: false,
+            alias: "b"
+        },
+        "filter": {
+            type: "string",
+            alias: "f"
+        }
+    }
+})
 
-const optionReg = {
-    list: /l/,
-    fromCurrentStage: /c/,
-    betweenTwo: /b/,
-    filter: /filter/,
-};
+const option = cli.flags;
+const arg1 = cli.input[0];
+const arg2 = cli.input[1];
 
 const getVersionChangingCommitsCommand = "git log -G'\"version\": \"[0-9]' --follow ./package.json";
 const commitHashReg = /\b[0-9a-f]{40}\b/g;
@@ -97,8 +124,8 @@ function insertCommitInfo(commits) {
 
 function filterCommits(commits) {
     let { messageFilter } = config;
-    if (optionReg.filter.test(option)) {
-        messageFilter = RegExp(option.split(":")[1]);
+    if (option.filter) {
+        messageFilter = RegExp(option.filter);
     }
     if (!messageFilter) {
         return commits;
@@ -113,11 +140,11 @@ function getCommitInfoBetweenTwoCommits(commitHashes) {
     let _baseHash = hash2;
     let _topHash = hash1;
 
-    if (optionReg.betweenTwo.test(option)) {
+    if (option.b) {
         _topHash = arg1;
         _baseHash = arg2;
     }
-    if (optionReg.fromCurrentStage.test(option)) {
+    if (option.c) {
         _topHash = arg1;
         _baseHash = hash1;
     }
@@ -132,9 +159,11 @@ const commitInfoPromise = exec(getVersionChangingCommitsCommand)
     .then(stdout => _.take(stdout.match(commitHashReg), 2))
     .then(getCommitInfoBetweenTwoCommits);
 
-if (optionReg.list.test(option)) {
+if (option.l) {
     // eslint-disable-next-line
     commitInfoPromise.then(console.log);
 } else {
     commitInfoPromise.then(insertCommitInfo);
 }
+
+
