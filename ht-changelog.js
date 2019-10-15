@@ -146,7 +146,6 @@ function generateChangeLog(commits) {
 function cleanMessage(message) {
     const regexp = /^.*((fix)|(feat)|(style)|(chore)|(refactor))\:?\s/;
     const scopeRegexp = /((fix)|(feat)|(style)|(chore)|(refactor))\([a-zA-Z0-9\u4e00-\u9fa5]*\)/;
-    console.log('message.replace(regexp, "")', message.replace(regexp, ""))
     const withoutPrefix = message.replace(regexp, "").replace(scopeRegexp, "");
     const scopeMatchResult = message.match(scopeRegexp)
     if (scopeMatchResult) {
