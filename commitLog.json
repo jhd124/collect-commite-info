@@ -1,0 +1,52 @@
+[
+	{
+		"hash": "93cf464937fb3589eef6164a50e2d44c7c2ab4d7",
+		"parent": "44543af53427d0c448f8e8d34b88129748b5cce8",
+		"auth": "Hongda Jing",
+		"date": "Wed Oct 9 22:42:52 2019 +0800",
+		"message": "0.0.4",
+		"version": "0.0.4",
+		"insertions": 2,
+		"deletions": 2
+	},
+	{
+		"hash": "44543af53427d0c448f8e8d34b88129748b5cce8",
+		"parent": "f23dd07fb9febb5fbca9078f0aaca31ce93683c8",
+		"auth": "Hongda Jing",
+		"date": "Wed Oct 9 22:42:10 2019 +0800",
+		"message": "fix bug",
+		"version": "0.0.4",
+		"insertions": 4,
+		"deletions": 0
+	},
+	{
+		"hash": "f23dd07fb9febb5fbca9078f0aaca31ce93683c8",
+		"parent": "5b8045b5325ebf2cce9115acb2fd5e7888124052",
+		"auth": "Hongda Jing",
+		"date": "Wed Oct 9 22:40:46 2019 +0800",
+		"message": "fix: wrong arg when use option c",
+		"version": "0.0.4",
+		"insertions": 14,
+		"deletions": 4
+	},
+	{
+		"hash": "5b8045b5325ebf2cce9115acb2fd5e7888124052",
+		"parent": "b56f9946154058728bf9f534e409fe145531393d",
+		"auth": "Hongda Jing",
+		"date": "Tue Oct 8 21:49:07 2019 +0800",
+		"message": "0.0.3",
+		"version": "0.0.3",
+		"insertions": 2,
+		"deletions": 2
+	},
+	{
+		"hash": "b56f9946154058728bf9f534e409fe145531393d",
+		"parent": "0a35f181317f350c045507aff17dfa1db4657ef3",
+		"auth": "Hongda Jing",
+		"date": "Tue Oct 8 21:48:59 2019 +0800",
+		"message": "chore: run npm link",
+		"version": "0.0.3",
+		"insertions": 41,
+		"deletions": 0
+	}
+]

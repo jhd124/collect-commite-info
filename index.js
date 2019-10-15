@@ -82,7 +82,9 @@ function parseCommit(commit) {
             return { [key]: value };
         })
         .reduce((accum, subMap) => ({ ...accum, ...subMap }), {});
-    result.version = version;
+    if (!option.b) {
+        result.version = version;
+    }
     return result;
 }
 
@@ -96,13 +98,16 @@ function insertContribute(commit) {
 function getContributesBetweenTwoCommits(parent, hash, diffIgnoreFlag) {
     const diffCommand = `git diff ${parent} ${hash} --shortstat ${diffIgnoreFlag}`;
     return exec(diffCommand).then(change => {
+
         const changeNumbers = change.split(",")
             .map(changeInfo => changeInfo && changeInfo.match(/[0-9]+/)[0])
             .filter(contribute => !!contribute);
+
         const contribute = {
             insertions: parseInt(changeNumbers[1] || 0, 10),
             deletions: parseInt(changeNumbers[2] || 0, 10),
         };
+
         return contribute;
     });
 }

@@ -15,6 +15,7 @@
   "license": "ISC",
   "description": "",
   "bin": {
-    "commits": "./index.js"
+    "commits": "./index.js",
+    "ht-changelog": "./ht-changelog.js"
   }
 }
