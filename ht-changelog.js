@@ -111,7 +111,7 @@ function generateChangeLog(commits) {
 
         const versionDate = new Date(groupedByVersion[version][0].date);
         const dateString = `${versionDate.getFullYear()}-${versionDate.getMonth()}-${versionDate.getDate()}`
-        const versionText = `## v${version} (${dateString})`;
+        const versionText = `## v-${version} (${dateString})`;
         appendLine(versionText);
 
         // type title
@@ -145,7 +145,16 @@ function generateChangeLog(commits) {
 
 function cleanMessage(message) {
     const regexp = /^.*((fix)|(feat)|(style)|(chore)|(refactor))\:?\s/;
-    return message.replace(regexp, "");
+    const scopeRegexp = /((fix)|(feat)|(style)|(chore)|(refactor))\([a-zA-Z0-9\u4e00-\u9fa5]*\)/;
+    console.log('message.replace(regexp, "")', message.replace(regexp, ""))
+    const withoutPrefix = message.replace(regexp, "").replace(scopeRegexp, "");
+    const scopeMatchResult = message.match(scopeRegexp)
+    if (scopeMatchResult) {
+        const rawScope = scopeMatchResult[0];
+        const scope = rawScope ? rawScope.split(/[\(\)]/)[1] : "";
+        return _.compact([scope, withoutPrefix]).join(" ");
+    }
+    return withoutPrefix;
 }
 
 

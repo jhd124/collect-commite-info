@@ -24,7 +24,7 @@
 		"parent": "5b8045b5325ebf2cce9115acb2fd5e7888124052",
 		"auth": "Hongda Jing",
 		"date": "Wed Oct 9 22:40:46 2019 +0800",
-		"message": "fix: wrong arg when use option c",
+		"message": "fix(abcd): wrong arg when use option c",
 		"version": "0.0.4",
 		"insertions": 14,
 		"deletions": 4
