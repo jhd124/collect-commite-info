@@ -9,23 +9,23 @@ const fs = require("fs-extra");
 const types = {
     fix: {
         name: "fix",
-        regexp: /fix:|fix\([a-zA-Z0-9\u4e00-\u9fa5]*\):/
+        regexp: /fix:|fix\([a-zA-Z0-9\u4e00-\u9fa5-_]*\):/
     },
     feat: {
         name: "feat",
-        regexp: /feat:|feat\([a-zA-Z0-9\u4e00-\u9fa5]*\):/
+        regexp: /feat:|feat\([a-zA-Z0-9\u4e00-\u9fa5-_]*\):/
     },
     refactor: {
         name: "refactor",
-        regexp: /refactor:|refactor\([a-zA-Z0-9\u4e00-\u9fa5]*\):/
+        regexp: /refactor:|refactor\([a-zA-Z0-9\u4e00-\u9fa5-_]*\):/
     },
     style: {
         name: "style",
-        regexp: /style:|style\([a-zA-Z0-9\u4e00-\u9fa5]*\):/
+        regexp: /style:|style\([a-zA-Z0-9\u4e00-\u9fa5-_]*\):/
     },
     chore: {
         name: "chore",
-        regexp: /chore:|chore\([a-zA-Z0-9\u4e00-\u9fa5]*\):/
+        regexp: /chore:|chore\([a-zA-Z0-9\u4e00-\u9fa5-_]*\):/
     },
 };
 
@@ -145,7 +145,7 @@ function generateChangeLog(commits) {
 
 function cleanMessage(message) {
     const regexp = /^.*((fix)|(feat)|(style)|(chore)|(refactor))\:?\s/;
-    const scopeRegexp = /((fix)|(feat)|(style)|(chore)|(refactor))\([a-zA-Z0-9\u4e00-\u9fa5]*\)/;
+    const scopeRegexp = /((fix)|(feat)|(style)|(chore)|(refactor))\([a-zA-Z0-9\u4e00-\u9fa5-_]*\)/;
     const withoutPrefix = message.replace(regexp, "").replace(scopeRegexp, "");
     const scopeMatchResult = message.match(scopeRegexp)
     if (scopeMatchResult) {
