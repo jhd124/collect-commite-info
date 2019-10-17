@@ -110,7 +110,7 @@ function generateChangeLog(commits) {
         //version
 
         const versionDate = new Date(groupedByVersion[version][0].date);
-        const dateString = `${versionDate.getFullYear()}-${versionDate.getMonth()}-${versionDate.getDate()}`
+        const dateString = `${versionDate.getFullYear()}-${versionDate.getMonth() + 1}-${versionDate.getDate()}`
         const versionText = `## v-${version} (${dateString})`;
         appendLine(versionText);
 
