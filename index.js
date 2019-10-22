@@ -59,7 +59,7 @@ const arg2 = cli.input[1];
 
 const getVersionChangingCommitsCommand = "git log -G'\"version\": \"[0-9]' --follow ./package.json";
 const commitHashReg = /\b[0-9a-f]{40}\b/g;
-const commitFormatString = "hash::%H@_@parent::%P@_@auth::%an@_@date::%ad@_@message::%s";
+const commitFormatString = "hash::%H@_@parent::%P@_@auth::%an@_@date::%cd@_@message::%s";
 const commitLogFilePath = path.resolve(process.cwd(), "./commitLog.json");
 
 function exec(command) {
